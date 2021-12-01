@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common::head"></head>
+<body>
+<header th:replace="fragments/common::header">
+    <script>
+        let input = document.getElementById('picture');
+
+        input.addEventListener('change', showFileName);
+
+        function showFileName(event) {
+
+            let fileName = input.value;
+            input.value = 'File name: ' + fileName;
+
+        }
+    </script>
+</header>
+
+<form th:action="@{/events/create}"
+      th:method="post"
+      th:object="${eventModel}"
+      class="form"
+      enctype="multipart/form-data"
+
+>
+
+    <div class="container">
+        <h1>Create Event</h1>
+        <p>Please fill in this form to create an event.</p>
+        <hr>
+
+        <p th:if="${wrongName}" class="error">Event name is required </p>
+
+        <label for="event-name"><b>Event name</b></label>
+        <input type="text" th:field="*{name}" placeholder="Enter event name" name="name" id="event-name"/>
+
+        <p th:if="${wrongStartDate}" class="error">Start date is required and must be in future </p>
+        <p th:if="${differenceInDates}" class="error">Start date must be before end date </p>
+
+        <label for="start-date"><b>Start date</b></label>
+        <input type="datetime-local" th:field="*{startDate}" name="startDate" id="start-date"/>
+
+        <p th:if="${wrongEndDate}" class="error">End date is required and must be in future </p>
+
+        <label for="end-date"><b>End date</b></label>
+        <input type="datetime-local" th:field="*{endDate}" name="endDate" id="end-date"/>
+
+        <p th:if="${wrongMaxPeople}" class="error">Field is required and must be positive </p>
+
+        <label for="max-attend"><b>Maximum attendants</b></label>
+        <input type="number" th:field="*{maxPeople}" placeholder="Enter maximum number of attendants" name="maxPeople" id="max-attend"/>
+
+        <p th:if="${wrongLocation}" class="error">Location is required </p>
+
+        <label for="location"><b>Location</b></label>
+        <input type="text" th:field="*{location}" placeholder="Enter location" name="location" id="location"/>
+
+        <label for="description"><b>Description</b></label>
+        <input type="text" placeholder="Enter description" name="description" id="description"/>
+
+        <p th:if="${wrongCategory}" class="error">Category is required </p>
+
+        <div class="box-gid">
+        <span for="sport-category"><b>Sport category</b>
+        <select  class="input-half-size" th:field="*{category}" type="text" placeholder="Enter sport category" name="category"
+                id="sport-category">
+            <option th:each=" s : ${sportCategory}" th:value="${s.name}"  th:text="${s.name()}"></option>
+        </select>
+        </span>
+
+            <p th:if="${noPicture}" class="error">Picture is required </p>
+
+            <span for="picture"><b>Picture</b>
+
+        <input class="input-half-size" th:field="*{pictures}" type="file" placeholder="Add a picture" accept="image/*" name="picture"
+               id="picture"/>
+        </span>
+    </div>
+        <button type="submit" class="create-btn">Create</button>
+    </div>
+
+</form>
+</body>
+</html>

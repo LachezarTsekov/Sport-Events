@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common::head">
+
+</head>
+<body>
+<header th:replace="fragments/common::header"></header>
+<div class="page-desc">
+    <span>Choose sport:</span>
+    <select th:replace="fragments/common::sport-dropdown"></select>
+    <h2>gallery</h2>
+</div>
+<div class="grid-container">
+    <div class="card">
+        <div class="bg-img">
+            <img src="#" alt="Sorry, no picture...">
+
+        </div>
+        <div class="content">
+            <h4>Card title</h4>
+            <p> Some quick example text to build on the card title and make up the bulk of the card's content. </p>
+            <a class="description-btn">Read more</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="bg-img">
+            <img src="#" alt="Sorry, no picture...">
+        </div>
+        <div class="content">
+            <h4>Card title</h4>
+            <p> Some quick example text to build on the card title and make up the bulk of the card's content. </p>
+            <a href="/" class="description-btn">Read more</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="bg-img">
+            <img src="/images/banner2.jpg" alt="asd">
+        </div>
+        <div class="content">
+            <h4>Card title</h4>
+            <p> Some quick example text to build on the card title and make up the bulk of the card's content. </p>
+            <a class="description-btn">Read more</a>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

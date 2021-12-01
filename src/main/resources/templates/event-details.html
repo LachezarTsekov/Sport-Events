@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/common::head"></head>
+<body>
+<header th:replace="fragments/common::header"></header>
+
+<div class="details-card" th:each="e : ${eventDetails}" th:object="${e}">
+
+
+
+
+
+        <div class="card-details">
+            <img th:src="*{picture}" alt="Sorry, no picture...">
+
+            <div class="content">
+                <h4 th:text="*{name}"></h4>
+                <p th:text="|Start date: *{startDate}|"></p>
+                <p th:text="|End date: *{endDate}|"></p>
+                <h3>About:</h3>
+                <p th:text="*{description}"></p>
+
+        </div>
+            <div sec:authorize="hasRole('ADMIN')" class="button-place">
+                <a th:href="@{/events/{id}/update(id=*{id})}" class="description-btn">Update</a>
+                <form th:action="@{/events/{id}/delete(id=*{id})}" th:method="delete">
+                    <input type="submit" class="description-btn" value="Delete">
+                </form>
+            </div>
+    </div>
+</div>
+
+</body>
+</html>

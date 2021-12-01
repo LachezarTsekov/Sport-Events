@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common::head"></head>
+<body>
+<header th:replace="fragments/common::header"></header>
+
+<form th:action="@{/users/register}"
+      th:method="post"
+      th:object="${userModel}"
+      class="form"
+>
+
+    <div class="container">
+        <h1>Register</h1>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+            <p th:if="${wrongUsername}" class="error">Username is required and should be between 3 and 20 symbols</p>
+            <p th:if="${usernameExist}" class="error">Username already exist</p>
+        <label for="username"><b>Username</b></label>
+        <input th:field="*{username}" type="text" placeholder="Enter Username" name="username" id="username" />
+
+        <p th:if="${wrongPassword}" class="error">Password is required and should be between 3 and 20 symbols</p>
+        <p th:if="${mismachPassword}" class="error">Passwords does not match</p>
+
+        <label for="password"><b>Password</b></label>
+        <input th:field="*{password}" type="password" placeholder="Enter Password" name="password" id="password" />
+
+        <label for="password-repeat"><b>Repeat Password</b></label>
+        <input th:field="*{repeatPassword}" type="password" placeholder="Repeat Password" name="password-repeat" id="password-repeat" />
+
+
+        <button type="submit" class="create-btn">Register</button>
+    </div>
+
+    <div class="container signin">
+        <p>Already have an account? <a href="/users/login">Sign in</a>.</p>
+    </div>
+</form>
+</body>
+</html>

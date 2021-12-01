@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/common::head"></head>
+
+
+<body>
+
+<header th:replace="fragments/common::header"></header>
+
+
+<div class="page-desc">
+<!--    <span>Choose sport:</span>-->
+<!--    <select class="category-dropdown">-->
+<!--        <option>all</option>-->
+<!--        <option>rugby</option>-->
+<!--        <option>football</option>-->
+<!--        <option>tennis</option>-->
+<!--        <option>volleyball</option>-->
+<!--    </select>-->
+
+    <h2>events</h2>
+</div>
+
+<div class="grid-container">
+    <div th:each="e : ${events}" th:object="${e}" class="card">
+        <div class="bg-img">
+            <img th:src="*{picture}" alt="Sorry, no picture...">
+
+        </div>
+        <div class="content">
+            <h4 th:text="*{name}"></h4>
+            <p th:text="|Start date: *{startDate}|"></p>
+            <p th:text="|End date: *{endDate}|"></p>
+            <p th:text="|Category: *{category}|"></p>
+            <a th:href="@{/events/details/{id}(id=*{id})}" class="description-btn">Read more</a>
+        </div>
+    </div>
+</div>
+
+<div sec:authorize="isAuthenticated()" class="create">
+
+    <a th:href="@{/events/create}" class="create-btn">Create Event</a>
+</div>
+
+
+</body>
+
+</html>
